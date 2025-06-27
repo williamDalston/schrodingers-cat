@@ -5,6 +5,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { menuData } from '../data/menuData';
+import catImg from '../assets/cat.jpg';
+
+
 
 const StyledLink = ({ to, children, primary = false, className = "" }) => (
   <motion.div 
@@ -172,14 +175,21 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 max-w-6xl mx-auto"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
-            className="mb-8"
-          >
-            <span className="text-8xl md:text-9xl animate-pulse">🐱</span>
-          </motion.div>
+      {/* Background Cat */}
+        <motion.img
+            src={catImg}
+            alt="Schrödinger's Cat"
+            className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            style={{
+                width: '90%',
+                height: '90%',
+            }}
+            initial={{ opacity: 0, scale: 3 }}
+            animate={{ opacity: .3, scale: 5 }}
+            transition={{ delay: 0.5, duration: 2 }}
+        />
+
+
 
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
