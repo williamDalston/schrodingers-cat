@@ -139,17 +139,6 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
   );
 };
 
-        {/* Hover Effect Overlay */}
-        <motion.div
-          className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-          initial={false}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-        />
-      </motion.div>
-    </motion.li>
-  );
-};
-
 // Filter Chips Component
 const FilterChips = ({ activeFilters, onFilterChange, availableFilters }) => {
   return (
