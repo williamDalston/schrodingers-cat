@@ -275,7 +275,7 @@ const PartyStep = ({ booking, updateBooking, onNext }) => (
       ))}
     </div>
     <p className="text-center text-yellow-100/60 text-sm mb-8">
-      For parties larger than 8, please call us directly at +995 555 123 456
+      For parties larger than 8, please call us directly at +995 559 011 262
     </p>
     <div className="text-center mt-16">
       <StepButton onClick={onNext}>Next: Choose Date</StepButton>
@@ -869,7 +869,7 @@ const ErrorScreen = ({ onRetry, onReset }) => (
       </div>
       <div className="mt-6 pt-6 border-t border-red-400/20">
         <p className="text-red-100/60 text-sm">
-          Need help? Call us at <span className="text-red-300">+995 955 011 262</span>
+          Need help? Call us at <span className="text-red-300">+995 599 011 262</span>
         </p>
       </div>
     </motion.div>
