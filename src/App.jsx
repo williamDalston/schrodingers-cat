@@ -3,6 +3,9 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
+import logo from './assets/logo.jpg';
+
+
 
 // Lazy-load pages
 const Home = React.lazy(() => import('./pages/Home'));
@@ -43,9 +46,20 @@ function Header() {
       className="sticky top-0 z-50 bg-green-950/90 backdrop-blur-lg border-b border-yellow-400/20"
     >
       <div className="container mx-auto flex justify-between items-center p-4">
-        <NavLink to="/" className="font-serif font-extrabold text-2xl text-yellow-300">
-          🐱 Schrödinger's Cat
+        <NavLink to="/" className="flex items-center space-x-3">
+          <img 
+            src={logo} 
+            alt="Schrödinger's Cat logo" 
+            style={{ height: '40px', width: '40px', objectFit: 'contain', borderRadius: '50%' }}
+          />
+
+
+
+          <span className="font-serif font-extrabold text-2xl text-yellow-300">
+            Schrödinger's Cat
+          </span>
         </NavLink>
+
         <nav className="hidden md:flex items-center space-x-6 text-lg">
           {navLinks.map(({ path, label, icon }) => (
             <NavLink

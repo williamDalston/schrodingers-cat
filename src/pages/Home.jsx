@@ -156,7 +156,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>Schrödinger's Cat | A Culinary Paradox in Cancún</title>
-        <meta name="description" content="Where Georgian soul meets Cancún spirit. Explore a playful and elegant dining experience that balances quantum curiosity with culinary artistry." />
+        <meta name="description" content="Tbilisi tradition, with a paradox on the side." />
       </Helmet>
 
       {/* Hero Section */}
@@ -208,7 +208,7 @@ export default function Home() {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="text-xl md:text-2xl text-yellow-200/90 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            Where Georgian soul meets Cancún spirit. <br/>
+            Tbilisi tradition, with a paradox on the side. <br/>
             <span className="text-cyan-300 font-semibold">An elegant experiment in flavor and uncertainty.</span>
           </motion.p>
 
