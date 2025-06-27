@@ -4,6 +4,9 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { menuData } from '../data/menuData';
+import manBg from '../assets/man.jpg';
+
+
 
 const formatPrice = (priceObj) => {
   if (!priceObj || typeof priceObj.amount !== 'number') return '';
@@ -332,12 +335,64 @@ export default function Menu() {
         <meta name="keywords" content="restaurant, menu, Georgian cuisine, quantum dining, Tbilisi" />
       </Helmet>
       
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="text-white max-w-7xl mx-auto"
-      >
+        <div className="relative">
+        {/* Background image layer */}
+       <div className="relative min-h-screen">
+  {/* Background image layer */}
+      <div className="relative">
+        {/* centered transparent background image */}
+        <img
+          src={manBg}
+          alt="Background"
+          className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+            w-64 h-64 object-contain opacity-10 z-0"
+        />
+
+        {/* main content sits on top */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10 text-white max-w-7xl mx-auto px-6 py-12"
+        >
+          <h1 className="text-4xl font-bold mb-4">Quantum Menu</h1>
+          {/* Search, filters, view toggle here */}
+
+          <ul className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'space-y-4'}>
+            {Object.values(menuData).flatMap(cat => cat.items).map((item, idx) => (
+              <MenuItem key={item.id} item={item} index={idx} />
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+
+
+
+        {/* Foreground content */}
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="relative z-10 text-white max-w-7xl mx-auto"
+        >
+            {/* your existing content (header, menu, etc.) */}
+        </motion.div>
+        </div>
+
+
+
+
+        {/* Foreground menu content */}
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="relative z-10 text-white max-w-7xl mx-auto"
+        >
+
+
+
+        
         {/* Enhanced Header */}
         <motion.div variants={headerVariants} className="text-center mb-12">
           <motion.div
@@ -502,6 +557,7 @@ export default function Menu() {
           )}
         </AnimatePresence>
       </motion.div>
+      </div>
     </>
   );
 }
