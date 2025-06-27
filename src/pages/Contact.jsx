@@ -1,4 +1,3 @@
-export default function Contact() { return <div className='text-white'>Contact Page</div>; }
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -210,8 +209,7 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setFormStatus('sending');
@@ -247,7 +245,8 @@ export default function Contact() {
       setTbilisiTime(tbilisiDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }));
       
       const tbilisiHour = tbilisiDate.getHours();
-      setIsOpen(tbilisiHour >= 13 && tbilisiHour < 23);
+      // Open from 14:00 (2 PM) to 02:00 (2 AM next day)
+      setIsOpen(tbilisiHour >= 14 || tbilisiHour < 2);
     };
 
     updateTimes();
@@ -317,7 +316,7 @@ export default function Contact() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
             <ContactCard icon="📍" title="Location" delay={0.1}>
               <div className="space-y-2">
-                <p className="text-lg font-semibold">18 Kiacheli Street</p>
+                <p className="text-lg font-semibold">6 Shalva Dadiani Street</p>
                 <p>Tbilisi, Georgia</p>
                 <motion.a 
                   href="#map" 
@@ -350,7 +349,7 @@ export default function Contact() {
             
             <ContactCard icon="🕒" title="Hours" delay={0.3}>
               <div className="space-y-3">
-                <p className="text-lg font-semibold">1:00 PM – 11:00 PM</p>
+                <p className="text-lg font-semibold">2:00 PM – 2:00 AM</p>
                 <p className="text-yellow-200/80">Tbilisi Time</p>
                 <StatusIndicator isOpen={isOpen} tbilisiTime={tbilisiTime} />
                 <p className="text-sm text-yellow-100/60">Your time: {localTime}</p>
@@ -405,7 +404,7 @@ export default function Contact() {
                   Send a Message
                 </motion.h2>
                 
-                <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                <div className="space-y-6">
                   <FormField 
                     id="name" 
                     label="Name" 
@@ -442,7 +441,7 @@ export default function Contact() {
                   <motion.button
                     whileHover={{ scale: 1.02, boxShadow: '0 10px 40px rgba(250, 204, 21, 0.3)' }}
                     whileTap={{ scale: 0.98 }}
-                    type="submit"
+                    onClick={handleSubmit}
                     disabled={formStatus === 'sending'}
                     className={`w-full py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
                       formStatus === 'success' 
@@ -461,7 +460,7 @@ export default function Contact() {
                       {buttonContent.text}
                     </motion.span>
                   </motion.button>
-                </form>
+                </div>
               </div>
             </motion.div>
             
@@ -479,7 +478,7 @@ export default function Contact() {
                   <p className="text-yellow-300 font-semibold text-sm">📍 Find Us Here</p>
                 </div>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2978.204548698384!2d44.79153091543329!3d41.7165842792348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440d463b36a28b%3A0x6e488f244b2e858!2s18%20Leo%20Kiacheli%20St%2C%20T'bilisi!5e0!3m2!1sen!2sge!4v1625841381358!5m2!1sen!2sge"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.8846205448084!2d44.796773!3d41.7196699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440d4637baa9ff%3A0x61b4b7d9b9b4b7d9!2s6%20Shalva%20Dadiani%20St%2C%20T'bilisi%2C%20Georgia!5e0!3m2!1sen!2sus!4v1625841381358!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: 'brightness(0.9) contrast(1.1) hue-rotate(30deg)' }}
