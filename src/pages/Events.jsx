@@ -1,4 +1,4 @@
-export default function Events() { return <div className='text-white'>Events Page</div>; }
+
 // src/pages/Events.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
