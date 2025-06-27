@@ -5,7 +5,11 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { menuData } from '../data/menuData';
 
-// Enhanced Menu Item Component
+const formatPrice = (priceObj) => {
+  if (!priceObj || typeof priceObj.amount !== 'number') return '';
+  return `${priceObj.currency || '₾'} ${priceObj.amount.toFixed(0)}`;
+};
+
 const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef(null);
@@ -17,11 +21,7 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
       opacity: 1, 
       y: 0, 
       scale: 1,
-      transition: { 
-        duration: 0.6, 
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
+      transition: { duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }
     }
   };
 
@@ -41,10 +41,7 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
       variants={itemVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      whileHover={{ 
-        scale: 1.02,
-        transition: { duration: 0.2 }
-      }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       className="group relative"
@@ -56,7 +53,6 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
             : 'bg-green-950/30 border-yellow-400/20 hover:border-yellow-400/30'
         }`}
       >
-        {/* Favorite Button */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -76,7 +72,6 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
           </motion.span>
         </motion.button>
 
-        {/* Item Header with Leader Dots */}
         <div className="flex items-baseline mb-3">
           <motion.h3 
             className="text-xl font-bold text-yellow-300 group-hover:text-yellow-200 transition-colors"
@@ -92,11 +87,10 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
             className="text-xl font-mono font-bold text-yellow-400 group-hover:text-yellow-300 transition-colors"
             whileHover={{ scale: 1.05 }}
           >
-            ${item.price.toFixed(2)}
+            {formatPrice(item.price)}
           </motion.span>
         </div>
 
-        {/* Dietary Icons */}
         {getDietaryIcons(item).length > 0 && (
           <motion.div 
             className="flex flex-wrap gap-2 mb-3"
@@ -118,7 +112,6 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
           </motion.div>
         )}
 
-        {/* Description */}
         <motion.p 
           className="text-yellow-100/80 leading-relaxed group-hover:text-yellow-100/90 transition-colors"
           animate={{ opacity: isHovered ? 1 : 0.8 }}
@@ -126,7 +119,6 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
           {item.description}
         </motion.p>
 
-        {/* Popularity Indicator */}
         {item.popular && (
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
@@ -136,6 +128,16 @@ const MenuItem = ({ item, index, onAddToFavorites, isFavorite }) => {
             🔥 Popular
           </motion.div>
         )}
+
+        <motion.div
+          className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          initial={false}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+        />
+      </motion.div>
+    </motion.li>
+  );
+};
 
         {/* Hover Effect Overlay */}
         <motion.div
